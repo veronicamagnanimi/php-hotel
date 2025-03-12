@@ -11,15 +11,15 @@
 <div class="container">
 <h1 class="text-center my-3 fw-bold text-secondary">Hotel</h1>
 <!-- form -->
- <form action="index.php" method="get" class="mb-3">
+ <form method="get" class="mb-3">
+    <div class="form-check mb-3"> 
+        <label for="vote" class="form-label">Voto</label> 
+        <input type="number" name="vote" id="vote" class="form-control w-25" min="1" max="5" placeholder="Min 1 Max 5">
+    </div>
  <div class="form-check">
     <label for="parking" class="form-check-label" >Parcheggio</label>
     <input type="checkbox" name="parking" id="parking" class="form-check-input">
     </div>
-    <div class="form-check">
-    <label for="minVote" class="form-label">Voto minimo</label>
-    <input type="number" name="minVote" id="minVote" class="form-control w-25" min="1" max="5">
-</div>
     <button type="submit" class="btn btn-secondary mt-3">Ricerca</button>
  </form>
 
@@ -79,16 +79,23 @@
         ],
 
     ];
- 
 
-    foreach ($hotels as $curItem) {
-        echo "<tr>";
-        echo "<td>{$curItem['name']}</td>";
-        echo "<td>{$curItem['description']}</td>";
-        echo "<td>" . ($curItem['parking'] ? 'Sì' : 'No') . "</td>";
-        echo "<td>{$curItem['vote']}</td>";
-        echo "<td>{$curItem['distance_to_center']} km</td>";
-        echo "</tr>";
+ //filtri
+$parking_filter = isset($_GET['parking']);
+
+
+foreach ($hotels as $hotel) {
+    if ($parking_filter && !$hotel['parking']) {
+        continue;
+    }
+        
+    echo "<tr>";
+    echo "<td>{$hotel['name']}</td>";
+    echo "<td>{$hotel['description']}</td>";
+    echo "<td>" . ($hotel['parking'] ? 'Sì' : 'No') . "</td>";
+    echo "<td>{$hotel['vote']}</td>";
+    echo "<td>{$hotel['distance_to_center']} km</td>";
+    echo "</tr>";
     }
 
 ?>
