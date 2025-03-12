@@ -10,6 +10,21 @@
 <body>
 <div class="container">
 <h1 class="text-center my-3 fw-bold text-secondary">Hotel</h1>
+<!-- form -->
+ <form action="index.php" method="get" class="mb-3">
+ <div class="form-check">
+    <label for="parking" class="form-check-label" >Parcheggio</label>
+    <input type="checkbox" name="parking" id="parking" class="form-check-input">
+    </div>
+    <div class="form-check">
+    <label for="minVote" class="form-label">Voto minimo</label>
+    <input type="number" name="minVote" id="minVote" class="form-control w-25" min="1" max="5">
+</div>
+    <button type="submit" class="btn btn-secondary mt-3">Ricerca</button>
+ </form>
+
+
+<!-- tabella -->
 <table class="table table-striped">
     <thead>
         <tr>
@@ -64,9 +79,7 @@
         ],
 
     ];
-
-    // var_dump($hotels);
-
+ 
 
     foreach ($hotels as $curItem) {
         echo "<tr>";
